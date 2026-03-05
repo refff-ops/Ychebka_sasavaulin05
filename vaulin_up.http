@@ -1,0 +1,6 @@
+@vaulin_up_HostAddress = http://localhost:5291
+
+GET {{vaulin_up_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
