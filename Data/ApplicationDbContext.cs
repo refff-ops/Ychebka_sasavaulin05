@@ -20,6 +20,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<ProductWorkshop> ProductWorkshops { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     public virtual DbSet<Workshop> Workshops { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +58,14 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.Workshop).WithMany(p => p.ProductWorkshops)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("product_workshop_workshop_id_fkey");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.UsersId).HasName("users_pkey");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+            entity.Property(e => e.Role).HasDefaultValueSql("'User'::character varying");
         });
 
         modelBuilder.Entity<Workshop>(entity =>

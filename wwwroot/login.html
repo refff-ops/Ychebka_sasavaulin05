@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Вход — Сашка Сигма</title>
+  <link rel="icon" type="image/x-icon" href="Комфорт.ico" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body data-page="login" class="theme-nexus">
+  <div class="fx-bg">
+    <div class="fx-orb orb-a"></div>
+    <div class="fx-orb orb-b"></div>
+    <div class="fx-orb orb-c"></div>
+    <div class="fx-grid"></div>
+    <div class="fx-noise"></div>
+    <div class="fx-vignette"></div>
+    <div class="cursor-glow" id="cursor_glow"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <main class="login-shell">
+    <section class="login-card glass tilt-card">
+      <div class="login-top">
+        <div class="login-logo-wrap">
+          <img src="Комфорт.png" alt="Комфорт" class="login-logo" />
+        </div>
+        <div>
+          <div class="eyebrow">Secure Access</div>
+          <h1>Comfort Nexus</h1>
+          <p class="login-sub">
+            Премиальный вход в систему управления с неоновым стилем, стеклом и мягкой анимацией.
+          </p>
+        </div>
+      </div>
+
+      <div class="login-form-area">
+        <label class="field">
+          <span class="field-label">Логин</span>
+          <input id="login_user" class="input" type="text" placeholder="Введите логин" />
+          <span class="field-error" id="err_login"></span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Пароль</span>
+          <input id="login_pass" class="input" type="password" placeholder="Введите пароль" />
+          <span class="field-error" id="err_pass"></span>
+        </label>
+
+        <div class="login-actions">
+          <button class="btn btn-primary magnetic" id="btn_do_login" type="button">Войти</button>
+          <button class="btn btn-secondary magnetic" id="btn_register" type="button">Регистрация</button>
+          <button class="btn btn-ghost magnetic" id="btn_go_app" type="button">В приложение</button>
+        </div>
+
+        <div class="login-bottom-note">
+          Используй существующие данные или регистрацию, если она уже поддерживается твоим backend.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="msg_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge" id="msg_kind">INFO</span>
+          <span id="msg_title">Сообщение</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="msg_body" class="msg-body">…</div>
+        <details class="msg-details-wrap">
+          <summary>Детали</summary>
+          <pre id="msg_details" class="logbox"></pre>
+        </details>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary magnetic" data-close="1" type="button">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

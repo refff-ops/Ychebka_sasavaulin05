@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using vaulin_up.Data;
-//using vaulin_up.Services;
+using vaulin_up.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,13 +19,13 @@ builder.Services.AddSwaggerGen();
 // DbContext (PostgreSQL)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+   var cs = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseNpgsql(cs);
 });
 
 // DI сервисов auth
-//builder.Services.AddScoped<PasswordHasherService>();
-//builder.Services.AddScoped<JwtTokenService>();
+builder.Services.AddScoped<PasswordHasherService>();
+builder.Services.AddScoped<JwtTokenService>();
 
 // JWT auth
 var jwt = builder.Configuration.GetSection("Jwt");

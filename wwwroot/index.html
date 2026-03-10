@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Саша Сигма</title>
+  <link rel="icon" type="image/x-icon" href="Комфорт.ico" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body data-page="app" class="theme-nexus">
+  <div class="fx-bg">
+    <div class="fx-orb orb-a"></div>
+    <div class="fx-orb orb-b"></div>
+    <div class="fx-orb orb-c"></div>
+    <div class="fx-grid"></div>
+    <div class="fx-noise"></div>
+    <div class="fx-vignette"></div>
+    <div class="cursor-glow" id="cursor_glow"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <div class="shell">
+    <aside class="sidebar glass tilt-card">
+      <div class="brandbox">
+        <div class="brand-logo-wrap">
+          <img src="Комфорт.png" alt="Комфорт" class="brand-logo" />
+        </div>
+        <div class="brand-copy">
+          <div class="brand-title">Comfort Nexus</div>
+          <div class="brand-sub">Apple × Cyberpunk × Launcher</div>
+        </div>
+      </div>
+
+      <div class="statusbox">
+        <div class="status-label">Статус доступа</div>
+        <div class="status-value" id="auth_status">Not authorized</div>
+      </div>
+
+      <nav class="side-nav">
+        <button class="navbtn active magnetic" id="nav_tables" type="button">
+          <span class="navbtn-dot"></span>
+          <span>Каталог</span>
+        </button>
+        <button class="navbtn magnetic" id="nav_logs" type="button">
+          <span class="navbtn-dot"></span>
+          <span>Логи</span>
+        </button>
+        <button class="navbtn magnetic" id="nav_history" type="button">
+          <span class="navbtn-dot"></span>
+          <span>История</span>
+        </button>
+        <button class="navbtn magnetic danger" id="nav_exit" type="button">
+          <span class="navbtn-dot"></span>
+          <span>Выход</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="chipline">
+          <span class="chip">Neon UI</span>
+          <span class="chip">Realtime Feel</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero glass tilt-card">
+        <div class="hero-copy">
+          <div class="eyebrow">Панель управления</div>
+          <h1>Продукция компании «Комфорт»</h1>
+          <p>
+            Футуристичный интерфейс управления сущностями, карточками, просмотром,
+            редактированием и навигацией без поломки текущей логики.
+          </p>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-k">Выбрано</span>
+              <span class="hero-stat-v" id="selected_id">—</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-k">Найдено</span>
+              <span class="hero-stat-v" id="search_count">—</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-k">Страница</span>
+              <span class="hero-stat-v" id="page_label">1 / 1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-ring"></div>
+          <div class="hero-core">
+            <img src="Комфорт.png" alt="Комфорт" />
+          </div>
+        </div>
+      </section>
+
+      <section class="panel glass">
+        <div class="view active" id="view_tables">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <label class="field select-wrap">
+                <span class="field-label">Сущность</span>
+                <select id="entity_select" class="input input-select"></select>
+              </label>
+
+              <label class="field search-wrap">
+                <span class="field-label">Поиск</span>
+                <input id="search_q" class="input" placeholder="Поиск по карточкам" />
+              </label>
+            </div>
+
+            <div class="toolbar-right">
+              <button class="btn btn-primary magnetic" id="btn_open_create" type="button">Добавить</button>
+              <button class="btn btn-secondary magnetic" id="btn_reload" type="button">Обновить</button>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <button class="btn btn-ghost magnetic" id="btn_open_view" type="button">Открыть</button>
+            <button class="btn btn-ghost magnetic" id="btn_open_edit" type="button">Изменить</button>
+            <button class="btn btn-danger magnetic" id="btn_open_delete" type="button">Удалить</button>
+            <button class="btn btn-ghost magnetic" id="btn_token_toggle" type="button">Токен</button>
+            <button class="btn btn-ghost magnetic" id="btn_login_page" type="button">Страница входа</button>
+            <button class="btn btn-ghost magnetic" id="btn_logout" type="button">Выйти</button>
+          </div>
+
+          <div class="pagination glass-soft">
+            <div class="pagination-left">
+              <button class="btn btn-ghost magnetic" id="btn_page_prev" type="button">Назад</button>
+              <button class="btn btn-ghost magnetic" id="btn_page_next" type="button">Вперед</button>
+            </div>
+
+            <div class="pagination-center">
+              <label class="field mini-field">
+                <span class="field-label">Страница</span>
+                <input id="page_input" class="input" placeholder="1" />
+              </label>
+              <button class="btn btn-ghost magnetic" id="btn_page_go" type="button">Перейти</button>
+
+              <label class="field mini-field">
+                <span class="field-label">ID</span>
+                <input id="goto_id" class="input" placeholder="Например 123" />
+              </label>
+              <button class="btn btn-ghost magnetic" id="btn_goto_id" type="button">Найти</button>
+
+              <label class="field mini-field">
+                <span class="field-label">На странице</span>
+                <input id="page_size" class="input" placeholder="12" />
+              </label>
+              <button class="btn btn-ghost magnetic" id="btn_page_apply" type="button">Применить</button>
+            </div>
+          </div>
+
+          <div class="cards-stage">
+            <div class="cards_grid cardsgrid" id="cards_grid"></div>
+          </div>
+
+          <div class="hintline">
+            <span>Клик по карточке — выбор</span>
+            <span>Двойной клик — открытие</span>
+            <span>Поиск работает локально</span>
+          </div>
+        </div>
+
+        <div class="view" id="view_logs">
+          <div class="section-head">
+            <h2>Системные логи</h2>
+            <button class="btn btn-secondary magnetic" id="btn_logs_clear" type="button">Очистить</button>
+          </div>
+          <pre id="log" class="logbox"></pre>
+        </div>
+
+        <div class="view" id="view_history">
+          <div class="section-head">
+            <h2>История</h2>
+          </div>
+          <div class="history-placeholder glass-soft">
+            Здесь можно оставить раздел истории действий, аудита или событий пользователя.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="token_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge" id="token_badge">JWT</span>
+          <span>Токен</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <pre id="token_box" class="logbox"></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost magnetic" id="btn_token_copy" type="button">Копировать</button>
+        <button class="btn btn-primary magnetic" data-close="1" type="button">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="details_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge ok" id="details_badge">DETAILS</span>
+          <span id="details_title">Детали</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="details_body"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost magnetic" id="btn_details_copy" type="button">Copy JSON</button>
+        <button class="btn btn-primary magnetic" data-close="1" type="button">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="form_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge" id="form_badge">FORM</span>
+          <span id="form_title">Форма</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="form_fields" class="formgrid"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost magnetic" data-close="1" type="button">Отмена</button>
+        <button class="btn btn-primary magnetic" id="btn_form_submit" type="button">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="confirm_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge warn" id="confirm_badge">CONFIRM</span>
+          <span id="confirm_title">Подтверждение</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="confirm_body">…</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost magnetic" data-close="1" type="button">Отмена</button>
+        <button class="btn btn-danger magnetic" id="btn_confirm_yes" type="button">Да</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="msg_modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-panel glass">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="badge" id="msg_kind">INFO</span>
+          <span id="msg_title">Сообщение</span>
+        </div>
+        <button class="iconbtn" data-close="1" type="button">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="msg_body" class="msg-body">…</div>
+        <details class="msg-details-wrap">
+          <summary>Детали</summary>
+          <pre id="msg_details" class="logbox"></pre>
+        </details>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary magnetic" data-close="1" type="button">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

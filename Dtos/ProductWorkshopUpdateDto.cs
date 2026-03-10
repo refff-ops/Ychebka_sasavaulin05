@@ -1,16 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace vaulin_up.Dtos;
 
 public sealed class ProductWorkshopUpdateDto
 {
-
-
-
-
-    public int WorkshopId { get; set; }
-
-
-
+    [Range(typeof(decimal), "0", "999999", ErrorMessage = "Время изготовления не может быть отрицательным.")]
     public decimal ManufactureHours { get; set; }
-
-
 }
